@@ -1,3 +1,10 @@
+/* for dev only */
+* {
+  border: 1px red solid;
+  margin: 5px;
+}
+/* for dev only */
+
 .App {
   text-align: center;
 }
