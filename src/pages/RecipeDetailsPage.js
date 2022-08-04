@@ -5,8 +5,9 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import AddPost from "../components/AddPost";
 
+
 function RecipeDetailsPage(props) {
-    const { user } = useContext(AuthContext);
+    const { user, isLoggedIn } = useContext(AuthContext);
     const storedToken = localStorage.getItem("authToken");
     const [recipe, setRecipe] = useState(null);
     const { recipeId } = useParams();
@@ -58,22 +59,30 @@ function RecipeDetailsPage(props) {
                     <button onClick={deleteRecipe} >Delete Me!</button>
                 </>)}
 
-            <br/><br/><br/>
+            <br /><br /><br />
 
             <div className="card">
-            <hr />Comments:<hr />
-            {recipe &&
-                recipe.posts.map((post) => (
-                    <li className="PostCard card" key={post._id}>
-                        <h5>{post.title}</h5>
-                        <p>{post.description}</p>
-                    </li>
-                ))}
+                <hr />Comments:<hr />
+                {recipe &&
+                    recipe.posts.map((post) => (
+                        <li className="PostCard card" key={post._id}>
+                            <h5>{post.title}</h5>
+                            <p>{post.description}</p>
+                        </li>
+                    ))}
             </div>
-            
-            <AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe}/>
 
-            <br/><br/><br/>
+            {user && (<AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe} />)}
+            {!user && (
+                <>
+                    <Link to={`/login/`}>
+                        login to create a comment
+                    </Link>
+                </>
+            )}
+
+
+            <br /><br /><br />
 
             <Link to="/recipes">
                 <button>Back to all Recipes</button>
