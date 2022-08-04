@@ -19,9 +19,6 @@ function AddRecipe(props) {
         const requestBody = { title, description, user:user._id };
 
 
-//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-//---->need add new recipe also to user
-
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/recipes`, 
@@ -29,6 +26,7 @@ function AddRecipe(props) {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
+                console.log("user Obj from client:",user);
                 props.refreshRecipes(); //update RecipesList
                 setTitle("");//clear form
                 setDescription("");//clear form

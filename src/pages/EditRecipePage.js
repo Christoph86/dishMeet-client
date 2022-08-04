@@ -48,6 +48,7 @@ function EditRecipePage(props) {
             .then((response) => {
                 navigate(`/recipes/${recipeId}`)
             });
+            //catch error here if not author
     };
 
 

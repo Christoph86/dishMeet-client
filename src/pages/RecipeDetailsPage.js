@@ -1,8 +1,11 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../context/auth.context";
 
 function RecipeDetailsPage(props) {
+    const { user } = useContext(AuthContext);
     const storedToken = localStorage.getItem("authToken");
     const [recipe, setRecipe] = useState(null);
     const { recipeId } = useParams();
@@ -21,7 +24,7 @@ function RecipeDetailsPage(props) {
     const deleteRecipe = () => {
         axios
             .delete(`${process.env.REACT_APP_API_URL}/recipes/${recipeId}`,
-            { headers: { Authorization: `Bearer ${storedToken}` } })
+                { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
                 navigate('/recipes');
             })
@@ -35,6 +38,10 @@ function RecipeDetailsPage(props) {
 
     return (
         <div className="RecipeDetails">
+
+            <h1>test</h1>
+
+
             {recipe && (
                 <>
                     <h1>{recipe.title}</h1>
@@ -51,13 +58,14 @@ function RecipeDetailsPage(props) {
                     </li>
                 ))}
 
-            <Link to={`/recipes/edit/${recipeId}`}>
-                <button>Edit</button>
-            </Link>
+            {recipe && user && recipe.user === user._id && ( //you are the Author, show edit, delete
+                <>
+                    <Link to={`/recipes/edit/${recipeId}`}>
+                        <button>Edit</button>
+                    </Link>
 
-            <button onClick={deleteRecipe} >Delete Me!</button>
-
-            
+                    <button onClick={deleteRecipe} >Delete Me!</button>
+                </>)}
 
             <Link to="/recipes">
                 <button>Back to all Recipes</button>
