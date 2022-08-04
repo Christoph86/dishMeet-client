@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import AddPost from "../components/AddPost";
 
 function RecipeDetailsPage(props) {
     const { user } = useContext(AuthContext);
@@ -39,24 +40,14 @@ function RecipeDetailsPage(props) {
     return (
         <div className="RecipeDetails">
 
-            <h1>test</h1>
-
+            <hr />Recipe:<hr />
 
             {recipe && (
-                <>
+                <div className="card">
                     <h1>{recipe.title}</h1>
                     <p>{recipe.description}</p>
-                </>
+                </div>
             )}
-
-            {recipe &&
-                recipe.posts.map((post) => (
-                    <li className="PostCard card" key={post._id}>
-                        <h3>{post.title}</h3>
-                        <h4>Description:</h4>
-                        <p>{post.description}</p>
-                    </li>
-                ))}
 
             {recipe && user && recipe.user === user._id && ( //you are the Author, show edit, delete
                 <>
@@ -66,6 +57,23 @@ function RecipeDetailsPage(props) {
 
                     <button onClick={deleteRecipe} >Delete Me!</button>
                 </>)}
+
+            <br/><br/><br/>
+
+            <div className="card">
+            <hr />Comments:<hr />
+            {recipe &&
+                recipe.posts.map((post) => (
+                    <li className="PostCard card" key={post._id}>
+                        <h5>{post.title}</h5>
+                        <p>{post.description}</p>
+                    </li>
+                ))}
+            </div>
+            
+            <AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe}/>
+
+            <br/><br/><br/>
 
             <Link to="/recipes">
                 <button>Back to all Recipes</button>

@@ -3,7 +3,7 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 
-function AddRecipe(props) {
+function AddPost(props) {
     const { user } = useContext(AuthContext);
 
     const [title,       setTitle]       = useState("");
@@ -14,32 +14,34 @@ function AddRecipe(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
+        console.log("test555",props.recipeId);
         //setErrorMsg("");  set to initialState on every mount,.... or??? 
-        const requestBody = { title, description, user:user._id };
-
+        const requestBody = { title, description, user:user._id, recipeId:props.recipeId };
+        //title, dexcription und user kommen in das postObj
+        //recipeId wird gebraucht um ihn im rezept.posts[] hinzuzufügen
 
         axios
             .post(
-                `${process.env.REACT_APP_API_URL}/recipes`, 
+                `${process.env.REACT_APP_API_URL}/posts`, 
                 requestBody,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                props.refreshRecipes(); //update RecipesList
+                console.log(requestBody);
+                props.refreshRecipeDetails(); //update RecipeDetails
                 setTitle("");//clear form
                 setDescription("");//clear form
             })
             .catch((error) => {
-                setErrorMsg("error creating new Recipe");
+                setErrorMsg("error creating new Post");
                 console.log(error)
             });
     };
 
 
     return (
-        <div className="AddRecipe">
-            <h3>Add Recipe</h3>
+        <div className="AddPost card">
+            add Comment:
             <hr/>
             { errorMsg && <p className="error">{errorMsg}</p> }
             
@@ -62,10 +64,10 @@ function AddRecipe(props) {
                 />
 
                 <br/>
-                <button type="submit">Submit new Recipe</button>
+                <button type="submit">Submit new Comment</button>
             </form>
         </div>
     );
 }
 
-export default AddRecipe;
+export default AddPost;

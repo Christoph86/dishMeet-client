@@ -5,7 +5,6 @@ import AddRecipe from "../components/AddRecipe";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 
-
 function RecipeListPage() {
     const { isLoggedIn } = useContext(AuthContext); 
     const [recipes, setRecipes] = useState([]);
@@ -22,7 +21,7 @@ function RecipeListPage() {
         getAllRecipes();
     }, []);
 
-
+        //use bootstrap collapse for addrEcipe to hide initialy
     return (
         <div className="RecipeListPage">
 
