@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button';
+
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -41,14 +43,14 @@ function EditRecipePage(props) {
         // Make a PUT request to update the project
         axios
             .put(
-                `${process.env.REACT_APP_API_URL}/recipes/${recipeId}`, 
+                `${process.env.REACT_APP_API_URL}/recipes/${recipeId}`,
                 requestBody,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
                 navigate(`/recipes/${recipeId}`)
             });
-            //catch error here if not author
+        //catch error here if not author
     };
 
 
@@ -69,12 +71,11 @@ function EditRecipePage(props) {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-
-                <button type="submit">Update Recipe</button>
+                <Button variant="warning" type="submit">Update Recipe</Button>
             </form>
 
             <Link to={`/recipes/${recipeId}`}>
-                <button>Cancel without Changes on the Recipe</button>
+                <Button variant="warning" >Cancel without Changes on the Recipe</Button>
             </Link>
         </div>
     );

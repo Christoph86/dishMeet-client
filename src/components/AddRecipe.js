@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import Button from 'react-bootstrap/Button';
 
 function AddRecipe(props) {
     const { user } = useContext(AuthContext);
@@ -39,10 +40,8 @@ function AddRecipe(props) {
 
     return (
         <div className="AddRecipe">
-            <h3>Add Recipe</h3>
-            <hr/>
-            { errorMsg && <p className="error">{errorMsg}</p> }
-            
+
+            { errorMsg && <p className="error">{errorMsg}</p> }  
 
             <form onSubmit={handleSubmit}>
                 <label>Title:</label>
@@ -62,7 +61,7 @@ function AddRecipe(props) {
                 />
 
                 <br/>
-                <button type="submit">Submit new Recipe</button>
+                <Button variant="warning" type="submit">Submit new Recipe</Button>
             </form>
         </div>
     );

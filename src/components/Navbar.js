@@ -14,7 +14,6 @@ function NavBar() {
 
     return (
         <Navbar bg="light" expand="lg">
-            <Button variant="success">Success</Button>{' '}
             <Container>
                 <Navbar.Brand href="/">{"DishMe(et)"}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

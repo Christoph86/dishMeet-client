@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
+import { Button } from "react-bootstrap";
 
 function AddPost(props) {
     const { user } = useContext(AuthContext);
@@ -41,11 +42,9 @@ function AddPost(props) {
 
     return (
         <div className="AddPost card">
-            add Comment:
-            <hr/>
+
             { errorMsg && <p className="error">{errorMsg}</p> }
             
-
             <form onSubmit={handleSubmit}>
                 <label>Title:</label>
                 <input
@@ -64,7 +63,7 @@ function AddPost(props) {
                 />
 
                 <br/>
-                <button type="submit">Submit new Comment</button>
+                <Button variant="warning" type="submit">Submit new Comment</Button>
             </form>
         </div>
     );

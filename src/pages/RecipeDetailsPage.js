@@ -1,3 +1,6 @@
+import Button from 'react-bootstrap/Button';
+import Collapse from 'react-bootstrap/Collapse';
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -12,6 +15,7 @@ function RecipeDetailsPage(props) {
     const [recipe, setRecipe] = useState(null);
     const { recipeId } = useParams();
     const navigate = useNavigate();
+    const [open, setOpen] = useState(false);
 
     const getRecipe = () => {
         axios
@@ -53,10 +57,9 @@ function RecipeDetailsPage(props) {
             {recipe && user && recipe.user === user._id && ( //you are the Author, show edit, delete
                 <>
                     <Link to={`/recipes/edit/${recipeId}`}>
-                        <button>Edit</button>
+                        <Button variant="warning" >Edit</Button>
                     </Link>
-
-                    <button onClick={deleteRecipe} >Delete Me!</button>
+                    <Button onClick={deleteRecipe} variant="warning" >Delete the Recipe</Button>
                 </>)}
 
             <br /><br /><br />
@@ -72,7 +75,6 @@ function RecipeDetailsPage(props) {
                     ))}
             </div>
 
-            {user && (<AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe} />)}
             {!user && (
                 <>
                     <Link to={`/login/`}>
@@ -80,12 +82,26 @@ function RecipeDetailsPage(props) {
                     </Link>
                 </>
             )}
-
-
-            <br /><br /><br />
+            {user && (
+                <div className='card'>
+                    <Button
+                        variant="warning"
+                        onClick={() => setOpen(!open)}
+                        aria-controls="collapse-addRecipe-Form"
+                        aria-expanded={open}
+                    >
+                        Add new Comment
+                    </Button>
+                    <Collapse in={open}>
+                        <div id="collapse-addRecipe-Form">
+                            <AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe} />
+                        </div>
+                    </Collapse>
+                </div>
+            )}
 
             <Link to="/recipes">
-                <button>Back to all Recipes</button>
+                <Button variant="warning" type="submit">back to all Recipes</Button>
             </Link>
         </div>
     );
