@@ -3,27 +3,28 @@ import axios from "axios";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Button } from "react-bootstrap";
+import Form from 'react-bootstrap/Form';
 
 function AddPost(props) {
     const { user } = useContext(AuthContext);
 
-    const [title,       setTitle]       = useState("");
+    const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
-    const [errorMsg,    setErrorMsg]    = useState("");
+    const [errorMsg, setErrorMsg] = useState("");
 
     const storedToken = localStorage.getItem("authToken");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("test555",props.recipeId);
+        console.log("test555", props.recipeId);
         //setErrorMsg("");  set to initialState on every mount,.... or??? 
-        const requestBody = { title, description, user:user._id, recipeId:props.recipeId };
+        const requestBody = { title, description, user: user._id, recipeId: props.recipeId };
         //title, dexcription und user kommen in das postObj
         //recipeId wird gebraucht um ihn im rezept.posts[] hinzuzufügen
 
         axios
             .post(
-                `${process.env.REACT_APP_API_URL}/posts`, 
+                `${process.env.REACT_APP_API_URL}/posts`,
                 requestBody,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
@@ -41,31 +42,33 @@ function AddPost(props) {
 
 
     return (
-        <div className="AddPost card">
+        <div className="AddPost">
+            {errorMsg && <p className="error">{errorMsg}</p>}
 
-            { errorMsg && <p className="error">{errorMsg}</p> }
-            
-            <form onSubmit={handleSubmit}>
-                <label>Title:</label>
-                <input
-                    type="text"
-                    value={title}
-                    required
-                    onChange={(e) => setTitle(e.target.value)}
-                />
+            <Form onSubmit={handleSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Title:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={title}
+                        required
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </Form.Group>
 
-                <label>Description:</label>
-                <textarea
-                    type="text"
-                    value={description}
-                    required
-                    onChange={(e) => setDescription(e.target.value)}
-                />
-
-                <br/>
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>your Comment:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={description}
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                        as="textarea" rows={5}
+                    />
+                </Form.Group>
                 <Button variant="warning" type="submit">Submit new Comment</Button>
-            </form>
-        </div>
+            </Form>
+        </div >
     );
 }
 

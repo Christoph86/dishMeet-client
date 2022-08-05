@@ -1,5 +1,5 @@
 import Button from 'react-bootstrap/Button';
-
+import Form from 'react-bootstrap/Form';
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
@@ -58,7 +58,7 @@ function EditRecipePage(props) {
         <div className="EditProjectPage">
             <h3>Edit the Recipe</h3>
 
-            <form onSubmit={handleFormSubmit}>
+            {/* <form onSubmit={handleFormSubmit}>
                 <label>Title:</label>
                 <input
                     type="text"
@@ -72,7 +72,31 @@ function EditRecipePage(props) {
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 <Button variant="warning" type="submit">Update Recipe</Button>
-            </form>
+            </form> */}
+
+            <Form onSubmit={handleFormSubmit}>
+                <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Title:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={title}
+                        required
+                        onChange={(e) => setTitle(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Description:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={description}
+                        required
+                        onChange={(e) => setDescription(e.target.value)}
+                        as="textarea" rows={5}
+                    />
+                </Form.Group>
+                <Button variant="warning" type="submit">Update Recipe</Button>
+            </Form>
 
             <Link to={`/recipes/${recipeId}`}>
                 <Button variant="warning" >Cancel without Changes on the Recipe</Button>

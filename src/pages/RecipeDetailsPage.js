@@ -10,12 +10,22 @@ import AddPost from "../components/AddPost";
 
 
 function RecipeDetailsPage(props) {
-    const { user, isLoggedIn } = useContext(AuthContext);
+    
     const storedToken = localStorage.getItem("authToken");
-    const [recipe, setRecipe] = useState(null);
     const { recipeId } = useParams();
     const navigate = useNavigate();
+    const { user } = useContext(AuthContext);
+
+
+    const [recipe, setRecipe] = useState(null);
     const [open, setOpen] = useState(false);
+
+
+    useEffect(() => {
+        getRecipe();
+    }, [recipeId]);
+
+    
 
     const getRecipe = () => {
         axios
@@ -36,10 +46,6 @@ function RecipeDetailsPage(props) {
             })
             .catch((error) => console.log(error));
     };
-
-    useEffect(() => {
-        getRecipe();
-    }, []);
 
 
     return (

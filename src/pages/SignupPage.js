@@ -1,3 +1,5 @@
+import Button from 'react-bootstrap/Button';
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
@@ -68,7 +70,8 @@ function SignupPage(props) {
                 </label>
 
                 <br/><br/>
-                <button type="submit">Sign Up</button>
+                
+                <Button variant="warning" type="submit">SignUp</Button>
                 <hr/>
             </form>
 
