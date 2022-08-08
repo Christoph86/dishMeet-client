@@ -13,7 +13,7 @@ function NavBar() {
     const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
     return (
-        <Navbar  fixed="top" bg="warning" expand="lg">
+        <Navbar  bg="warning" expand="lg">
             <Container>
                 <Navbar.Brand href="/">{"DishMe(et)"}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />

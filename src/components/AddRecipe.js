@@ -10,13 +10,24 @@ function AddRecipe(props) {
 
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState("");
+    const [image, setImage] = useState("");
+    const [servings, setServings] = useState("");
+    const [ingredients, setIngredients] = useState("");
+    const [cookingAdvice, setCookingAdvice] = useState("");
     const [errorMsg, setErrorMsg] = useState("");
 
     const storedToken = localStorage.getItem("authToken");
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { title, description, user: user._id };
+        const requestBody = { 
+            title,
+            description, 
+            image,
+            servings,
+            ingredients,
+            cookingAdvice,
+            user: user._id };
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/recipes`,
@@ -27,6 +38,10 @@ function AddRecipe(props) {
                 props.refreshRecipes(); //update RecipesList
                 setTitle("");//clear form
                 setDescription("");//clear form
+                setImage("");
+                setServings("");
+                setIngredients("");
+                setCookingAdvice("");
             })
             .catch((error) => {
                 setErrorMsg("error creating new Recipe");
@@ -36,11 +51,10 @@ function AddRecipe(props) {
 
 
     return (
-        <div className="AddRecipe">
-            {errorMsg && <p className="error">{errorMsg}</p>}
+<div className="AddRecipePage">
 
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3">
                     <Form.Label>Title:</Form.Label>
                     <Form.Control
                         type="text"
@@ -50,7 +64,7 @@ function AddRecipe(props) {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>Description:</Form.Label>
                     <Form.Control
                         type="text"
@@ -60,8 +74,53 @@ function AddRecipe(props) {
                         as="textarea" rows={5}
                     />
                 </Form.Group>
-                <Button variant="warning" type="submit">Submit new Recipe</Button>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Image:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={image}
+                        required
+                        onChange={(e) => setImage(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Servings:</Form.Label>
+                    <Form.Control
+                        type="number"
+                        value={servings}
+                        required
+                        onChange={(e) => setServings(e.target.value)}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Ingredients:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={ingredients}
+                        required
+                        onChange={(e) => setIngredients(e.target.value)}
+                        as="textarea" rows={5}
+                    />
+                </Form.Group>
+
+                <Form.Group className="mb-3">
+                    <Form.Label>Cooking Advices:</Form.Label>
+                    <Form.Control
+                        type="text"
+                        value={cookingAdvice}
+                        required
+                        onChange={(e) => setCookingAdvice(e.target.value)}
+                        as="textarea" rows={5}
+                    />
+                </Form.Group>
+                
+
+                <Button variant="warning" type="submit">Add Recipe</Button>
             </Form>
+
         </div>
     );
 }

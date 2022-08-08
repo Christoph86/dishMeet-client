@@ -56,7 +56,7 @@ function RecipeListPage() {
 
                 return (
                     <Card className='bg-light' style={{ width: '18rem' }}>
-                        <Card.Img variant="top" src="https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg" />
+                        <Card.Img variant="top" src={recipe.image} />
                         <Card.Body>
                             <Card.Title>{recipe.title}</Card.Title>
                             <Card.Text>
