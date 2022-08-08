@@ -1,9 +1,12 @@
-import { useState } from "react";
-import axios from "axios";
-import { useContext } from "react";
+
 import { AuthContext } from "../context/auth.context";
+
 import { Button } from "react-bootstrap";
 import Form from 'react-bootstrap/Form';
+
+import { useState,  useContext } from "react";
+import axios from "axios";
+
 
 function AddPost(props) {
     const { user } = useContext(AuthContext);
@@ -16,12 +19,7 @@ function AddPost(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("test555", props.recipeId);
-        //setErrorMsg("");  set to initialState on every mount,.... or??? 
         const requestBody = { title, description, user: user._id, recipeId: props.recipeId };
-        //title, dexcription und user kommen in das postObj
-        //recipeId wird gebraucht um ihn im rezept.posts[] hinzuzufügen
-
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/posts`,
@@ -29,7 +27,6 @@ function AddPost(props) {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                console.log(requestBody);
                 props.refreshRecipeDetails(); //update RecipeDetails
                 setTitle("");//clear form
                 setDescription("");//clear form

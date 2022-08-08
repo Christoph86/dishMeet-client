@@ -1,10 +1,15 @@
 /* for dev only */
-* {
+/* * {
   border: 1px lightcoral solid;
   margin: 5px;
   padding: 5px;
-}
+} */
 /* for dev only */
+.recipeListPage {
+  display: flex;
+  flex-wrap: wrap;
+  /* margin: 1rem; */
+}
 
 .App {
   text-align: center;

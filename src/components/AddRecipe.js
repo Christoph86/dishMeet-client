@@ -16,11 +16,7 @@ function AddRecipe(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        //setErrorMsg("");  set to initialState on every mount,.... or??? 
         const requestBody = { title, description, user: user._id };
-
-
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/recipes`,

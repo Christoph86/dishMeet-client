@@ -26,12 +26,9 @@ function RecipeListPage() {
         getAllRecipes();
     }, []);
 
-    //use bootstrap collapse for addrEcipe to hide initialy
+
     return (
-        <div className="RecipeListPage">
-
-
-
+        <div className="recipeListPage">
             <hr />
             {!isLoggedIn && (<p>login to add your own recipes</p>)}
             {isLoggedIn && (
@@ -56,7 +53,6 @@ function RecipeListPage() {
 
             {recipes.map((recipe) => {
 
-                //maybe add component recipeCard, to reuse in profilePage
 
                 return (
                     <Card className='bg-light' style={{ width: '18rem' }}>
@@ -81,29 +77,3 @@ function RecipeListPage() {
 }
 
 export default RecipeListPage;
-
-
-
-
-
-// function BasicExample() {
-//   return (
-//     <Card style={{ width: '18rem' }}>
-//       <Card.Img variant="top" src="./../../public/logo192.png" />
-//       <Card.Body>
-//         <Card.Title>{recipe.title}</Card.Title>
-//         <Card.Text>
-//           {recipe.description}
-//         </Card.Text>
-//         <Button variant="primary">
-
-//         <Link to={`/recipes/${recipe._id}`}>
-//                             <h3>{recipe.title}</h3>
-//                         </Link>
-//         </Button>
-//       </Card.Body>
-//     </Card>
-//   );
-// }
-
-// export default BasicExample;
