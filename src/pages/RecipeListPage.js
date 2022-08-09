@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import AddRecipeModal from "../components/AddRecipeModal";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
+import ShowRecipeDetailsModal from '../components/ShowRecipeDetailsModal';
 
 function RecipeListPage() {
     const { isLoggedIn } = useContext(AuthContext);
@@ -33,9 +34,7 @@ function RecipeListPage() {
             {!isLoggedIn && (<p>login to add your own recipes</p>)}
             {isLoggedIn && (
                 <div className=''>
-
                             <AddRecipeModal refreshRecipes={getAllRecipes} />
-
                 </div>
             )}
 
@@ -53,6 +52,7 @@ function RecipeListPage() {
                             <Card.Text>
                                 {recipe.description}
                             </Card.Text>
+                            <ShowRecipeDetailsModal recipeId={recipe._id} />
                             <Link to={`/recipes/${recipe._id}`}>
                                 <Button variant="warning">
                                     Show Recipe

@@ -9,6 +9,7 @@ import Collapse from 'react-bootstrap/Collapse';
 //import { useState, useEffect } from "react";
 //import axios from "axios";
 import { Link } from "react-router-dom";
+import ShowRecipeDetailsModal from "../components/ShowRecipeDetailsModal";
 //import AddRecipe from "../components/AddRecipe";
 //import { useContext } from "react";
 //import { AuthContext } from "../context/auth.context"
@@ -38,28 +39,23 @@ function ProfilePage(props) {
         <div className="profilePage">
 
             {user && (
-                <>
-                    <div className="card">
-                        <strong>Welcome back {user.username}!</strong>
-                        <p>{user.email}</p>
-                        <br/>
-                        {/* {console.log("user from payload: ",user)}
-                        {console.log("createdAt from payload: ",user.createdAt)} */}
-                        <p>you are a Member in our Community since {user.createdAt}</p>
-                        <p>{user.email}</p>
-                    </div>
-                </>
+                <div className="card">
+                    <strong>Welcome back {user.username}!</strong>
+                    <p>{user.email}</p>
+                    <br />
+                    <p>you are a Member in our Community since {user.createdAt}</p>
+                </div>
             )}
 
-
-            <div className='card'>
+            <>
+            <br/>
                 <Button
                     variant="warning"
                     onClick={() => setOpen(!open)}
                     aria-controls="collapse-addRecipe-Form"
                     aria-expanded={open}
                 >
-                    my Recipes
+                    my Recipes ↕️
                 </Button>
                 <br /><br />
                 <Collapse in={open}>
@@ -71,13 +67,10 @@ function ProfilePage(props) {
                                         return (
                                             <>
                                             <li>
-                                                <Link to={`/recipes/${recipe._id}`}>
-                                                    <Button variant="warning">
-                                                        {recipe.title}
-                                                    </Button>
-                                                </Link>
-                                            </li>
-                                            <br/>
+                                                <strong>{recipe.title}</strong>
+                                                <ShowRecipeDetailsModal recipeId={recipe._id} />
+                                                <br />
+                                                </li>
                                             </>
                                         );
                                 })}
@@ -85,12 +78,7 @@ function ProfilePage(props) {
                         </div>
                     </div>
                 </Collapse>
-            </div>
-
-
-            {/* myRecipes */}
-
-
+            </>
         </div>
     )
 }

@@ -55,10 +55,7 @@ function RecipeDetailsPage(props) {
     return (
         <div className="RecipeDetails card">
 
-        {console.log("recId from classic:",recipeId)}
-        {console.log(recipeId)}
-
-<p>by: {recipe &&recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate}</p>
+            <p>by: {recipe && recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate}</p>
 
             <hr />
             <h1>{recipe && recipe.title}</h1>
@@ -68,20 +65,20 @@ function RecipeDetailsPage(props) {
                 <div className="card">
 
                     <p>about this Recipe:</p>
-                        <pre>{recipe.description}</pre>
+                    <pre>{recipe.description}</pre>
                     <img src={recipe.image} alt={recipe.title} />
                     <p>servings: {recipe.servings}</p>
                     <p>Ingedients:</p>
-                        <pre>{recipe.ingredients}</pre>
+                    <pre>{recipe.ingredients}</pre>
                     <p>Cooking Advices:</p>
-                        <pre>{recipe.cookingAdvice}</pre>
+                    <pre>{recipe.cookingAdvice}</pre>
                 </div>
             )}
 
             {recipe && user && recipe.user._id === user._id && ( //you are the Author, show edit, delete
-                <>  <br/>
+                <>  <br />
                     <div>
-                    <EditRecipeModal recipeId={recipeId} refreshDetails={getRecipe}/>
+                        <EditRecipeModal recipeId={recipeId} refreshDetails={getRecipe} />
                         <Button onClick={deleteRecipe} variant="warning" >Delete the Recipe</Button>
                     </div>
 
@@ -104,7 +101,7 @@ function RecipeDetailsPage(props) {
                 <>
                     <Link to="/login/">
                         <Button variant="warning" >login to create a comment</Button>
-                        
+
                     </Link>
                 </>
             )}
@@ -126,7 +123,7 @@ function RecipeDetailsPage(props) {
                 </div>
             )}
 
-            <br/>
+            <br />
 
             <Link to="/recipes">
                 <Button variant="warning">back to all Recipes</Button>

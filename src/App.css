@@ -10,10 +10,10 @@
   flex-wrap: wrap;
 }
 
-.RecipeDetails{
+/* .RecipeDetails{
   width: 80vw;
   margin: 5vh 10vw;
-}
+} */
 
 .card pre {
   text-align: left;
