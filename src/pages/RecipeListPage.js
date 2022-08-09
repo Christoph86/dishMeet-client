@@ -5,7 +5,7 @@ import Collapse from 'react-bootstrap/Collapse';
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import AddRecipe from "../components/AddRecipe";
+import AddRecipeModal from "../components/AddRecipeModal";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 
@@ -33,19 +33,9 @@ function RecipeListPage() {
             {!isLoggedIn && (<p>login to add your own recipes</p>)}
             {isLoggedIn && (
                 <div className=''>
-                    <Button
-                        variant="warning"
-                        onClick={() => setOpen(!open)}
-                        aria-controls="collapse-addRecipe-Form"
-                        aria-expanded={open}
-                    >
-                        Add new Recipe
-                    </Button>
-                    <Collapse in={open}>
-                        <div id="collapse-addRecipe-Form">
-                            <AddRecipe refreshRecipes={getAllRecipes} />
-                        </div>
-                    </Collapse>
+
+                            <AddRecipeModal refreshRecipes={getAllRecipes} />
+
                 </div>
             )}
 
@@ -56,7 +46,7 @@ function RecipeListPage() {
                 return (
                     <Card className='bg-light' style={{ width: '18rem' }}>
                         <p>by: {recipe.user.username}, last activity: {dateOfLastUpdate}</p>
-                        {/* {console.log(recipe.updatedAt)} */}
+                        {console.log(recipe.updatedAt)}
                         <Card.Img variant="top" src={recipe.image} />
                         <Card.Body>
                             <Card.Title>{recipe.title}</Card.Title>

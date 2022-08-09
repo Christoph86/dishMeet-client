@@ -6,7 +6,6 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 import { NavLink } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
 
 function NavBar() {
 

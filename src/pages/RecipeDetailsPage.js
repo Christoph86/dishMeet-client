@@ -7,6 +7,7 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import AddPost from "../components/AddPost";
+import EditRecipeModal from '../components/EditRecipeModal';
 
 
 function RecipeDetailsPage(props) {
@@ -16,12 +17,11 @@ function RecipeDetailsPage(props) {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
 
-
     const [recipe, setRecipe] = useState(null);
     const [open, setOpen] = useState(false);
     const [dateOfCreation, setDateOfCreation] = useState(null);
     const [dateOfLastUpdate, setDateOfLastUpdate] = useState(null);
-   // let dateOfLastUpdate="BBB";
+
 
     useEffect(() => {
         getRecipe();
@@ -38,7 +38,6 @@ function RecipeDetailsPage(props) {
                 setDateOfCreation(new Date(oneRecipe.createdAt).toLocaleDateString())
                 setDateOfLastUpdate(new Date(oneRecipe.updatedAt).toLocaleDateString())
             })
-            //.then(dateOfLastUpdate =new Date(recipe.updatedAt).toLocaleDateString())
             .catch((error) => console.log(error));
     };
 
@@ -56,6 +55,9 @@ function RecipeDetailsPage(props) {
     return (
         <div className="RecipeDetails card">
 
+        {console.log("recId from classic:",recipeId)}
+        {console.log(recipeId)}
+
 <p>by: {recipe &&recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate}</p>
 
             <hr />
@@ -67,7 +69,7 @@ function RecipeDetailsPage(props) {
 
                     <p>about this Recipe:</p>
                         <pre>{recipe.description}</pre>
-                    <img src={recipe.image} alt='NO Picture' />
+                    <img src={recipe.image} alt={recipe.title} />
                     <p>servings: {recipe.servings}</p>
                     <p>Ingedients:</p>
                         <pre>{recipe.ingredients}</pre>
@@ -76,12 +78,10 @@ function RecipeDetailsPage(props) {
                 </div>
             )}
 
-            {recipe && user && recipe.user === user._id && ( //you are the Author, show edit, delete
+            {recipe && user && recipe.user._id === user._id && ( //you are the Author, show edit, delete
                 <>  <br/>
                     <div>
-                        <Link to={`/recipes/edit/${recipeId}`}>
-                            <Button variant="warning" >Edit</Button>
-                        </Link>
+                    <EditRecipeModal recipeId={recipeId} refreshDetails={getRecipe}/>
                         <Button onClick={deleteRecipe} variant="warning" >Delete the Recipe</Button>
                     </div>
 
