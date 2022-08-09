@@ -7,14 +7,11 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import HomePage from "./pages/HomePage";
 import RecipeListPage from "./pages/RecipeListPage";
-import RecipeDetailsPage from "./pages/RecipeDetailsPage";
 
 import SignupPage from "./pages/SignupPage";
 import LoginPage from "./pages/LoginPage";
-import IsPrivate from "./components/IsPrivate";
 import IsAnon from "./components/IsAnon";
 import ProfilePage from "./pages/ProfilePage";
-import EditRecipeModal from "./components/EditRecipeModal";
 
 function App() {
   return (
@@ -28,14 +25,6 @@ function App() {
         <Route path="/profile" element={ <ProfilePage/>}/>
         
         <Route path="/recipes" element={ <RecipeListPage /> } />
-        
-        <Route path="/recipes/:recipeId" element={ <RecipeDetailsPage /> } />
-
-        <Route path="/recipes/edit/:recipeId" element={
-          <IsPrivate>
-            <EditRecipeModal />
-          </IsPrivate>
-        } />
 
         <Route path="/signup" element={ 
           <IsAnon>
@@ -48,6 +37,8 @@ function App() {
             <LoginPage />
           </IsAnon>
         } />
+
+        {/* add wildcard route for forbidden requests */}
 
       </Routes>
       

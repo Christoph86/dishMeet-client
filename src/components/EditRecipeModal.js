@@ -58,7 +58,8 @@ function EditRecipeModal(props) {
             )
             .then((response) => {
                 props.refreshDetails()
-                navigate(`/recipes/${recipeId}`)
+                //navigate(`/recipes/${recipeId}`)
+                
             });
     };
 

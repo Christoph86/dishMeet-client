@@ -91,6 +91,8 @@ function RecipeDetailsPage(props) {
                 {recipe &&
                     recipe.posts.map((post) => (
                         <li className="PostCard card" key={post._id}>
+                            {console.log("SSSSSSSSSSSSS")}
+                            {console.log("single postsOnj:",post)}
                             <h5>{post.title}</h5>
                             <p>{post.description}</p>
                         </li>

@@ -3,7 +3,7 @@ import Collapse from 'react-bootstrap/Collapse';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import AddPost from "../components/AddPost";
@@ -15,8 +15,6 @@ function ShowRecipeDetailsModal(props) {
 
     const storedToken = localStorage.getItem("authToken");
 
-
-    //const { recipeId } = useParams();
     const recipeId = props.recipeId;
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
@@ -33,6 +31,7 @@ function ShowRecipeDetailsModal(props) {
 
     useEffect(() => {
         getRecipe();
+        // eslint-disable-next-line
     }, [recipeId]);
 
 
@@ -41,6 +40,7 @@ function ShowRecipeDetailsModal(props) {
         axios
             .get(`${process.env.REACT_APP_API_URL}/recipes/${recipeId}`)
             .then((response) => {
+                props.refreshRecipes();
                 const oneRecipe = response.data;
                 setRecipe(oneRecipe);
                 setDateOfCreation(new Date(oneRecipe.createdAt).toLocaleDateString())
@@ -54,6 +54,8 @@ function ShowRecipeDetailsModal(props) {
             .delete(`${process.env.REACT_APP_API_URL}/recipes/${recipeId}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } })
             .then((response) => {
+                props.refreshRecipes();
+                handleClose();
                 navigate('/recipes');
             })
             .catch((error) => console.log(error));
@@ -112,6 +114,8 @@ function ShowRecipeDetailsModal(props) {
                             {recipe &&
                                 recipe.posts.map((post) => (
                                     <li className="PostCard card" key={post._id}>
+                                        {/* {console.log("postObj", post)} */}
+                                        by: {post.user}, created on: {post.createdAt}
                                         <h5>{post.title}</h5>
                                         <p>{post.description}</p>
                                     </li>
@@ -146,7 +150,7 @@ function ShowRecipeDetailsModal(props) {
                         <br />
                         <div>
                             <Link to="/recipes">
-                                <Button variant="secondary">back to all Recipes</Button>
+                                <Button variant="secondary" onClick={handleClose}>back to all Recipes</Button>
                             </Link>
                             <Button variant="secondary" onClick={handleClose}>
                                 Close this Recipe

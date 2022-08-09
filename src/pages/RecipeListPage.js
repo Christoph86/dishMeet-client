@@ -45,19 +45,13 @@ function RecipeListPage() {
                 return (
                     <Card className='bg-light' style={{ width: '18rem' }}>
                         <p>by: {recipe.user.username}, last activity: {dateOfLastUpdate}</p>
-                        {console.log(recipe.updatedAt)}
                         <Card.Img variant="top" src={recipe.image} />
                         <Card.Body>
                             <Card.Title>{recipe.title}</Card.Title>
                             <Card.Text>
                                 {recipe.description}
                             </Card.Text>
-                            <ShowRecipeDetailsModal recipeId={recipe._id} />
-                            <Link to={`/recipes/${recipe._id}`}>
-                                <Button variant="warning">
-                                    Show Recipe
-                                </Button>
-                            </Link>
+                            <ShowRecipeDetailsModal recipeId={recipe._id} refreshRecipes={getAllRecipes} />
                         </Card.Body>
                     </Card>
                 );
