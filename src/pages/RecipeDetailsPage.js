@@ -10,7 +10,7 @@ import AddPost from "../components/AddPost";
 
 
 function RecipeDetailsPage(props) {
-    
+
     const storedToken = localStorage.getItem("authToken");
     const { recipeId } = useParams();
     const navigate = useNavigate();
@@ -19,13 +19,15 @@ function RecipeDetailsPage(props) {
 
     const [recipe, setRecipe] = useState(null);
     const [open, setOpen] = useState(false);
-
+    const [dateOfCreation, setDateOfCreation] = useState(null);
+    const [dateOfLastUpdate, setDateOfLastUpdate] = useState(null);
+   // let dateOfLastUpdate="BBB";
 
     useEffect(() => {
         getRecipe();
     }, [recipeId]);
 
-    
+
 
     const getRecipe = () => {
         axios
@@ -33,7 +35,10 @@ function RecipeDetailsPage(props) {
             .then((response) => {
                 const oneRecipe = response.data;
                 setRecipe(oneRecipe);
+                setDateOfCreation(new Date(oneRecipe.createdAt).toLocaleDateString())
+                setDateOfLastUpdate(new Date(oneRecipe.updatedAt).toLocaleDateString())
             })
+            //.then(dateOfLastUpdate =new Date(recipe.updatedAt).toLocaleDateString())
             .catch((error) => console.log(error));
     };
 
@@ -49,23 +54,37 @@ function RecipeDetailsPage(props) {
 
 
     return (
-        <div className="RecipeDetails">
+        <div className="RecipeDetails card">
 
-            <hr />Recipe:<hr />
+<p>by: {recipe &&recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate}</p>
+
+            <hr />
+            <h1>{recipe && recipe.title}</h1>
+            <hr />
 
             {recipe && (
                 <div className="card">
-                    <h1>{recipe.title}</h1>
-                    <p>{recipe.description}</p>
+
+                    <p>about this Recipe:</p>
+                        <pre>{recipe.description}</pre>
+                    <img src={recipe.image} alt='NO Picture' />
+                    <p>servings: {recipe.servings}</p>
+                    <p>Ingedients:</p>
+                        <pre>{recipe.ingredients}</pre>
+                    <p>Cooking Advices:</p>
+                        <pre>{recipe.cookingAdvice}</pre>
                 </div>
             )}
 
             {recipe && user && recipe.user === user._id && ( //you are the Author, show edit, delete
-                <>
-                    <Link to={`/recipes/edit/${recipeId}`}>
-                        <Button variant="warning" >Edit</Button>
-                    </Link>
-                    <Button onClick={deleteRecipe} variant="warning" >Delete the Recipe</Button>
+                <>  <br/>
+                    <div>
+                        <Link to={`/recipes/edit/${recipeId}`}>
+                            <Button variant="warning" >Edit</Button>
+                        </Link>
+                        <Button onClick={deleteRecipe} variant="warning" >Delete the Recipe</Button>
+                    </div>
+
                 </>)}
 
             <br /><br /><br />
@@ -83,8 +102,9 @@ function RecipeDetailsPage(props) {
 
             {!user && (
                 <>
-                    <Link to={`/login/`}>
-                        login to create a comment
+                    <Link to="/login/">
+                        <Button variant="warning" >login to create a comment</Button>
+                        
                     </Link>
                 </>
             )}
@@ -106,8 +126,10 @@ function RecipeDetailsPage(props) {
                 </div>
             )}
 
+            <br/>
+
             <Link to="/recipes">
-                <Button variant="warning" type="submit">back to all Recipes</Button>
+                <Button variant="warning">back to all Recipes</Button>
             </Link>
         </div>
     );

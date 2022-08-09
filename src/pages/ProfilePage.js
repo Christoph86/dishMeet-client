@@ -39,7 +39,7 @@ function ProfilePage(props) {
             {/* myRecipes */}
             <div className="card"> <strong>my Recipes:</strong>
                 {allRecipes.map((recipe) => {
-                    if (recipe.user === user._id)
+                    if (recipe.user._id === user._id)
                         return (
                             <div >
                                 <p>i am your recipe: {recipe.title}</p>

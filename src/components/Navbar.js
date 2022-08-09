@@ -13,15 +13,18 @@ function NavBar() {
     const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
 
     return (
-        <Navbar  bg="warning" expand="lg">
+        <Navbar bg="warning" expand="lg">
             <Container>
                 <Navbar.Brand href="/">{"DishMe(et)"}</Navbar.Brand>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse  id="basic-navbar-nav">
-                    
+                <Navbar.Collapse id="basic-navbar-nav">
+
                     <Nav className="me-auto">
-                        <NavLink to="/">Home</NavLink>
-                        <NavLink to="/recipes">Recipes</NavLink>
+
+                        <Navbar.Text>
+                            <NavLink to="/">Home</NavLink>
+                            <NavLink to="/recipes">Recipes</NavLink>
+                        </Navbar.Text>
 
                         {!isLoggedIn && (
                             <>
@@ -54,7 +57,7 @@ function NavBar() {
 
 
                     </Nav>
-                    
+
                 </Navbar.Collapse>
             </Container>
         </Navbar>

@@ -32,7 +32,7 @@ function RecipeListPage() {
             <hr />
             {!isLoggedIn && (<p>login to add your own recipes</p>)}
             {isLoggedIn && (
-                <div className='card'>
+                <div className=''>
                     <Button
                         variant="warning"
                         onClick={() => setOpen(!open)}
@@ -52,10 +52,11 @@ function RecipeListPage() {
             <hr />
 
             {recipes.map((recipe) => {
-
-
+                let dateOfLastUpdate =new Date(recipe.updatedAt).toLocaleDateString();
                 return (
                     <Card className='bg-light' style={{ width: '18rem' }}>
+                        <p>by: {recipe.user.username}, last activity: {dateOfLastUpdate}</p>
+                        {console.log(recipe.updatedAt)}
                         <Card.Img variant="top" src={recipe.image} />
                         <Card.Body>
                             <Card.Title>{recipe.title}</Card.Title>

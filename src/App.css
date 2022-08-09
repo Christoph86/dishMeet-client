@@ -8,7 +8,16 @@
 .recipeListPage {
   display: flex;
   flex-wrap: wrap;
-  /* margin: 1rem; */
+}
+
+.RecipeDetails{
+  width: 80vw;
+  margin: 5vh 10vw;
+}
+
+.card pre {
+  text-align: left;
+  margin-left: 5vw;
 }
 
 .App {

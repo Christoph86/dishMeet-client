@@ -39,13 +39,14 @@ function EditRecipePage(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { 
+        const requestBody = {
             title,
-            description, 
+            description,
             image,
             servings,
             ingredients,
-            cookingAdvice,};
+            cookingAdvice,
+        };
         axios
             .put(
                 `${process.env.REACT_APP_API_URL}/recipes/${recipeId}`,
@@ -77,6 +78,7 @@ function EditRecipePage(props) {
                     <Form.Label>Description:</Form.Label>
                     <Form.Control
                         type="text"
+                        //value={`<pre>${description}</pre>`}
                         value={description}
                         required
                         onChange={(e) => setDescription(e.target.value)}
@@ -89,7 +91,7 @@ function EditRecipePage(props) {
                     <Form.Control
                         type="text"
                         value={image}
-                        
+
                         onChange={(e) => setImage(e.target.value)}
                     />
                 </Form.Group>
@@ -125,14 +127,17 @@ function EditRecipePage(props) {
                         as="textarea" rows={5}
                     />
                 </Form.Group>
-                
 
-                <Button variant="warning" type="submit">Update Recipe</Button>
+                <div>
+                    <Button variant="warning" type="submit">Update Recipe</Button>
+                    <Link to={`/recipes/${recipeId}`}>
+                        <Button variant="warning" >Cancel without Changes on the Recipe</Button>
+                    </Link>
+                </div>
+
             </Form>
 
-            <Link to={`/recipes/${recipeId}`}>
-                <Button variant="warning" >Cancel without Changes on the Recipe</Button>
-            </Link>
+
         </div>
     );
 }
