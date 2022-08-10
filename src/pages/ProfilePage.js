@@ -99,7 +99,7 @@ function ProfilePage(props) {
                                             return (
                                                 <>
                                                     <li>
-                                                        <strong>{recipe.title}</strong>
+                                                        <strong>{recipe.title} by: {recipe.user.username}</strong>
                                                         <ShowRecipeDetailsModal recipeId={recipe._id} />
                                                         <br />
                                                     </li>
