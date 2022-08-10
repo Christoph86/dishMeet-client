@@ -34,13 +34,49 @@ function ShowRecipeDetailsModal(props) {
         // eslint-disable-next-line
     }, [recipeId]);
 
+    const checkIfLiked = (recipe) =>{
+        return (user && recipe && recipe.likes.includes(user._id))
+    }
 
+    const toggleLiked = (likedBoolean, recipeId, recipeLikes) =>{
+        if(!likedBoolean){ //add you to likes[] of targeted Recipe
+            recipeLikes.push(user._id)
+            const requestBody = {
+                likes : recipeLikes
+            };
+            axios
+            .put(
+                `${process.env.REACT_APP_API_URL}/recipes/${recipeId}/likes`,
+                requestBody,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                getRecipe()
+            });
+            console.log("add my heart");
+        } else { //remove you from likes[] of targeted Recipe
+            recipeLikes = recipeLikes.filter((e)=>{return e != user._id})
+            const requestBody = {
+                likes : recipeLikes
+            };
+            axios
+            .put(
+                `${process.env.REACT_APP_API_URL}/recipes/${recipeId}/likes`,
+                requestBody,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                getRecipe()
+            });
+            console.log("remove my Heart");
+        }
+    }
 
     const getRecipe = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/recipes/${recipeId}`)
             .then((response) => {
-                //props.refreshRecipes();
+                props.refreshRecipes();
                 const oneRecipe = response.data;
                 setRecipe(oneRecipe);
                 setDateOfCreation(new Date(oneRecipe.createdAt).toLocaleDateString())
@@ -84,7 +120,11 @@ function ShowRecipeDetailsModal(props) {
                 <Modal.Body>
                     <div className="RecipeDetails card">
 
-                        <p>by: {recipe && recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate}</p>
+                        <p>by: {recipe && recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate} Heart
+                        {checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(true, recipe._id, recipe.likes)}}>💗</span>} 
+                           {!checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(false, recipe._id, recipe.likes)}}>🤍</span>} 
+                        
+                        </p>
 
                         {recipe && (
                             <div className="card">

@@ -66,7 +66,7 @@ function ProfilePage(props) {
                                                 <>
                                                     <li>
                                                         <strong>{recipe.title}</strong>
-                                                        <ShowRecipeDetailsModal recipeId={recipe._id} />
+                                                        <ShowRecipeDetailsModal refreshRecipes={getAllRecipes} recipeId={recipe._id} />
                                                         <br />
                                                     </li>
                                                 </>
@@ -100,7 +100,7 @@ function ProfilePage(props) {
                                                 <>
                                                     <li>
                                                         <strong>{recipe.title} by: {recipe.user.username}</strong>
-                                                        <ShowRecipeDetailsModal recipeId={recipe._id} />
+                                                        <ShowRecipeDetailsModal refreshRecipes={getAllRecipes} recipeId={recipe._id} />
                                                         <br />
                                                     </li>
                                                 </>
