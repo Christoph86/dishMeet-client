@@ -27,12 +27,10 @@ function LoginModal(props) {
 
     const handleLoginSubmit = (e) => {
         e.preventDefault();
-        console.log("want to handle....");
         const requestBody = { username, password };
 
         axios.post(`${process.env.REACT_APP_API_URL}/login`, requestBody)
             .then((response) => {
-                console.log('JWT token from Modal login: ', response.data.authToken);
                 storeToken(response.data.authToken);
                 authenticateUser();
                 navigate('/');

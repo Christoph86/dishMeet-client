@@ -22,6 +22,8 @@ function App() {
         
         <Route path="/recipes" element={ <RecipeListPage /> } />
 
+        <Route path="/login" />
+
         {/* add wildcard route for forbidden requests */}
 
       </Routes>
