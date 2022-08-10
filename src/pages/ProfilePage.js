@@ -13,7 +13,10 @@ function ProfilePage(props) {
 
     const { user } = useContext(AuthContext);
     const [allRecipes, setAllRecipes] = useState([]);
-    const [open, setOpen] = useState(false);
+    const [openMyRecipes, setOpenMyRecipes] = useState(false);
+
+    const [openMyLikes, setOpenMyLikes] = useState(false);
+
 
     const getAllRecipes = () => {
         axios
@@ -42,33 +45,67 @@ function ProfilePage(props) {
             )}
 
             <>
-            <br/>
+                <br />
                 <Button
                     variant="warning"
-                    onClick={() => setOpen(!open)}
-                    aria-controls="collapse-addRecipe-Form"
-                    aria-expanded={open}
+                    onClick={() => setOpenMyRecipes(!openMyRecipes)}
+                    aria-controls="collapse-RecipeList"
+                    aria-expanded={openMyRecipes}
                 >
                     my Recipes ↕️
                 </Button>
                 <br /><br />
-                <Collapse in={open}>
-                    <div id="collapse-addRecipe-Form">
+                <Collapse in={openMyRecipes}>
+                    <div id="collapse-RecipeList">
                         <div className="card">
                             <ul>
                                 {// eslint-disable-next-line
-                                allRecipes.map((recipe) => {
-                                    if (recipe.user._id === user._id)
-                                        return (
-                                            <>
-                                            <li>
-                                                <strong>{recipe.title}</strong>
-                                                <ShowRecipeDetailsModal recipeId={recipe._id} />
-                                                <br />
-                                                </li>
-                                            </>
-                                        );
-                                })}
+                                    allRecipes.map((recipe) => {
+                                        if (recipe.user._id === user._id)
+                                            return (
+                                                <>
+                                                    <li>
+                                                        <strong>{recipe.title}</strong>
+                                                        <ShowRecipeDetailsModal recipeId={recipe._id} />
+                                                        <br />
+                                                    </li>
+                                                </>
+                                            );
+                                    })}
+                            </ul>
+                        </div>
+                    </div>
+                </Collapse>
+            </>
+
+            <>
+                <br />
+                <Button
+                    variant="warning"
+                    onClick={() => setOpenMyLikes(!openMyLikes)}
+                    aria-controls="collapse-LikesList"
+                    aria-expanded={openMyLikes}
+                >
+                   💗 my Likes 💗 
+                </Button>
+                <br /><br />
+                <Collapse in={openMyLikes}>
+                    <div id="collapse-LikesList">
+                        <div className="card">
+                            <ul>
+                                {// eslint-disable-next-line
+                                    allRecipes.map((recipe) => {
+                                        if (user && recipe.likes.includes(user._id))
+                                            return (
+                                                <>
+                                                    <li>
+                                                        <strong>{recipe.title}</strong>
+                                                        <ShowRecipeDetailsModal recipeId={recipe._id} />
+                                                        <br />
+                                                    </li>
+                                                </>
+                                            );
+                                    })}
                             </ul>
                         </div>
                     </div>
