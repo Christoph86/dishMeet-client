@@ -8,12 +8,26 @@
 .recipeListPage {
   display: flex;
   flex-wrap: wrap;
+  margin: 3rem;
 }
+
+.btn {
+  margin: 0rem 1rem ;
+}
+
+/* .navbar * {
+  border: red 1px solid;
+  margin: 2px;
+} */
 
 /* .RecipeDetails{
   width: 80vw;
   margin: 5vh 10vw;
 } */
+
+.singleRecipeCard{
+margin: 1rem;
+}
 
 .card pre {
   text-align: left;

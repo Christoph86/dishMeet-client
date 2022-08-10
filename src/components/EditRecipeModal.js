@@ -67,7 +67,6 @@ function EditRecipeModal(props) {
     return (
         <>
             <br />
-
             <Button variant="danger" onClick={handleShow}>
                 Edit this Recipe
             </Button>

@@ -43,7 +43,7 @@ function AddRecipeModal(props) {
             .then((response) => {
                 props.refreshRecipes(); //update RecipesList
                 setTitle("");//clear form
-                setDescription("");//clear form
+                setDescription("");
                 setImage("");
                 setServings("");
                 setIngredients("");

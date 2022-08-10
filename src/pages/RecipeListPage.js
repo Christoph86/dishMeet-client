@@ -43,8 +43,8 @@ function RecipeListPage() {
             {recipes.map((recipe) => {
                 let dateOfLastUpdate =new Date(recipe.updatedAt).toLocaleDateString();
                 return (
-                    <Card className='bg-light' style={{ width: '18rem' }}>
-                        <p>by: {recipe.user.username}, last activity: {dateOfLastUpdate}</p>
+                    <Card className='bg-light singleRecipeCard' style={{ width: '18rem' }}>
+                        <p>by: {recipe.user.username}, last activity: {dateOfLastUpdate}  Heart</p>
                         <Card.Img variant="top" src={recipe.image} />
                         <Card.Body>
                             <Card.Title>{recipe.title}</Card.Title>

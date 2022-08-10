@@ -43,7 +43,7 @@ function AddPost(props) {
             {errorMsg && <p className="error">{errorMsg}</p>}
 
             <Form onSubmit={handleSubmit}>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
+                <Form.Group className="mb-3">
                     <Form.Label>Title:</Form.Label>
                     <Form.Control
                         type="text"
@@ -53,7 +53,7 @@ function AddPost(props) {
                     />
                 </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Group className="mb-3">
                     <Form.Label>your Comment:</Form.Label>
                     <Form.Control
                         type="text"
