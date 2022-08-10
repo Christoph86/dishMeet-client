@@ -23,18 +23,6 @@ function App() {
         
         <Route path="/recipes" element={ <RecipeListPage /> } />
 
-        <Route path="/signup" element={ 
-          <IsAnon>
-            <SignupPage />
-          </IsAnon>
-        } />
-
-        <Route path="/login" element={ 
-          <IsAnon>
-            <LoginPage />
-          </IsAnon>
-        } />
-
         {/* add wildcard route for forbidden requests */}
 
       </Routes>
