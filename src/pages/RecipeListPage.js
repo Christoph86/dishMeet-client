@@ -1,10 +1,7 @@
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import Collapse from 'react-bootstrap/Collapse';
 
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import AddRecipeModal from "../components/AddRecipeModal";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
@@ -13,7 +10,6 @@ import ShowRecipeDetailsModal from '../components/ShowRecipeDetailsModal';
 function RecipeListPage() {
     const { isLoggedIn } = useContext(AuthContext);
     const [recipes, setRecipes] = useState([]);
-    const [open, setOpen] = useState(false);
 
     const getAllRecipes = () => {
         axios

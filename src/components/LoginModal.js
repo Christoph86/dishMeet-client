@@ -4,7 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 
 import { useContext, useState } from "react";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import { AuthContext } from '../context/auth.context';
 

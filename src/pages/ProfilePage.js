@@ -3,16 +3,10 @@ import axios from "axios";
 import { AuthContext } from '../context/auth.context';
 
 import Button from 'react-bootstrap/Button';
-//import Card from 'react-bootstrap/Card';
 import Collapse from 'react-bootstrap/Collapse';
 
-//import { useState, useEffect } from "react";
-//import axios from "axios";
-import { Link } from "react-router-dom";
 import ShowRecipeDetailsModal from "../components/ShowRecipeDetailsModal";
-//import AddRecipe from "../components/AddRecipe";
-//import { useContext } from "react";
-//import { AuthContext } from "../context/auth.context"
+
 
 
 function ProfilePage(props) {
@@ -62,7 +56,8 @@ function ProfilePage(props) {
                     <div id="collapse-addRecipe-Form">
                         <div className="card">
                             <ul>
-                                {allRecipes.map((recipe) => {
+                                {// eslint-disable-next-line
+                                allRecipes.map((recipe) => {
                                     if (recipe.user._id === user._id)
                                         return (
                                             <>

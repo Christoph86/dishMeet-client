@@ -2,7 +2,6 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import Modal from 'react-bootstrap/Modal';
 
 function EditRecipeModal(props) {
@@ -19,7 +18,6 @@ function EditRecipeModal(props) {
     const [cookingAdvice, setCookingAdvice] = useState("");
 
     const recipeId  = props.recipeId;
-    const navigate = useNavigate();
 
     const storedToken = localStorage.getItem("authToken");
 
@@ -58,8 +56,6 @@ function EditRecipeModal(props) {
             )
             .then((response) => {
                 props.refreshDetails()
-                //navigate(`/recipes/${recipeId}`)
-                
             });
     };
 

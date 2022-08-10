@@ -1,14 +1,14 @@
+//import Nav from 'react-bootstrap/Nav';
+// import { Button, ButtonGroup } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
-
-
+import { NavLink } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
-import { NavLink } from "react-router-dom";
+
 import LoginModal from './LoginModal';
-import { Button, ButtonGroup } from 'react-bootstrap';
+
 import SignUpModal from './SignUpModal';
 
 function NavBar() {
