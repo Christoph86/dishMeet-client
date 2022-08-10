@@ -40,7 +40,7 @@ function ShowRecipeDetailsModal(props) {
         axios
             .get(`${process.env.REACT_APP_API_URL}/recipes/${recipeId}`)
             .then((response) => {
-                props.refreshRecipes();
+                //props.refreshRecipes();
                 const oneRecipe = response.data;
                 setRecipe(oneRecipe);
                 setDateOfCreation(new Date(oneRecipe.createdAt).toLocaleDateString())

@@ -20,10 +20,6 @@ function RecipeListPage() {
     }
 
 
-
-
-
-
     const toggleLiked = (likedBoolean, recipeId, recipeLikes) =>{
         if(!likedBoolean){ //add you to likes[] of targeted Recipe
             recipeLikes.push(user._id)
@@ -67,7 +63,6 @@ function RecipeListPage() {
             .catch((error) => console.log(error));
     };
 
-    //invoke handleLikes(with props) from every recipe likeButton.onClick()
 
     useEffect(() => {
         getAllRecipes();
