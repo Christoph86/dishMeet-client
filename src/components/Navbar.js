@@ -11,6 +11,7 @@ import LoginModal from './LoginModal';
 
 import SignUpModal from './SignUpModal';
 import ProfilePageModal from './ProfilePageModal';
+import { Button } from 'react-bootstrap';
 
 function NavBar() {
 
@@ -39,7 +40,8 @@ function NavBar() {
                     {isLoggedIn && (
                         <>
                             <ProfilePageModal />
-                            <NavLink to="/" onClick={logOutUser}><strong>Logout</strong></NavLink>
+                            <NavLink to="/" onClick={logOutUser}>
+                                <Button><strong>Logout</strong></Button></NavLink>
                         </>
                     )}
 

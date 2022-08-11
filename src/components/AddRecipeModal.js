@@ -104,7 +104,6 @@ function AddRecipeModal(props) {
                                 <Form.Control
                                     type="text"
                                     value={image}
-                                    required
                                     onChange={(e) => setImage(e.target.value)}
                                 />
                             </Form.Group>

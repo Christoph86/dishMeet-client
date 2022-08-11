@@ -92,7 +92,7 @@ function RecipeListPage() {
                            {checkIfLiked(recipe)&&  <span onClick={() => {toggleLiked(true,  recipe._id, recipe.likes)}}>💗</span>} 
                            {!checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(false, recipe._id, recipe.likes)}}>🤍</span>} 
                         </p>
-                        <Card.Img variant="top" src={recipe.image} />
+                        <Card.Img variant="top" src={recipe.image || "https://upload.wikimedia.org/wikipedia/commons/a/ac/No_image_available.svg"} />
                         <Card.Body>
                             <Card.Title>{recipe.title}</Card.Title>
                             <Card.Text>
