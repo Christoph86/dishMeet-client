@@ -6,6 +6,8 @@ import AddRecipeModal from "../components/AddRecipeModal";
 import { useContext } from "react";
 import { AuthContext } from "../context/auth.context"
 import ShowRecipeDetailsModal from '../components/ShowRecipeDetailsModal';
+import LoginModal from '../components/LoginModal';
+import { Button } from 'react-bootstrap';
 
 function RecipeListPage() {
     const { isLoggedIn, user } = useContext(AuthContext);
@@ -70,24 +72,24 @@ function RecipeListPage() {
 
 
     return (
-        <div className="recipeListPage">
-            <hr />
-            {!isLoggedIn && (<p>login to add your own recipes</p>)}
+        <>
+            {!isLoggedIn && (<p><strong>login to add your own recipes</strong> </p>)}
             {isLoggedIn && (
                 <div className=''>
                             <AddRecipeModal refreshRecipes={getAllRecipes} />
                 </div>
             )}
-
-            <hr />
+        <div className="recipeListPage">
 
             {recipes.map((recipe) => {
                 let dateOfLastUpdate =new Date(recipe.updatedAt).toLocaleDateString();
                 return (
-                    <Card className='bg-light singleRecipeCard' style={{ width: '18rem' }}>
+                    <Card className='bg-warning singleRecipeCard' style={{ width: '18rem' }}> 
                         <p>by: {recipe.user.username}, 
                            last activity: {dateOfLastUpdate} 
-                           {checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(true, recipe._id, recipe.likes)}}>💗</span>} 
+                           
+                           {/* <h1>big bookmark test</h1> */}
+                           {checkIfLiked(recipe)&&  <span onClick={() => {toggleLiked(true,  recipe._id, recipe.likes)}}>💗</span>} 
                            {!checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(false, recipe._id, recipe.likes)}}>🤍</span>} 
                         </p>
                         <Card.Img variant="top" src={recipe.image} />
@@ -103,6 +105,7 @@ function RecipeListPage() {
             })}
 
         </div>
+        </>
     );
 }
 

@@ -36,6 +36,12 @@ margin: 1rem;
 
 .App {
   text-align: center;
+  height: 100vh;
+  width: 100vw;
+  background-color: aqua;
+  background-image: url(./images/free_food_background_bleached.jpg);
+  background-repeat: no-repeat;
+  background-size: cover
 }
 
 .App-logo {

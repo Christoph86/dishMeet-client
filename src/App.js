@@ -5,7 +5,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { Routes, Route } from "react-router-dom";
 
 import Navbar from "./components/Navbar";
-import HomePage from "./pages/HomePage";
+
 import RecipeListPage from "./pages/RecipeListPage";
 import ProfilePage from "./pages/ProfilePage";
 
@@ -14,19 +14,7 @@ function App() {
     <div className="App">
 
       <Navbar />
-
-      <Routes>      
-        <Route path="/" element={ <HomePage /> } />
-
-        <Route path="/profile" element={ <ProfilePage/>}/>
-        
-        <Route path="/recipes" element={ <RecipeListPage /> } />
-
-        <Route path="/login" />
-
-        {/* add wildcard route for forbidden requests */}
-
-      </Routes>
+    <RecipeListPage/>
       
     </div>
   );
