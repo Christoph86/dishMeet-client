@@ -24,7 +24,7 @@ function ProfilePageModal(props) {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-
+    
     const getAllRecipes = () => {
         axios
             .get(`${process.env.REACT_APP_API_URL}/recipes`)
@@ -46,7 +46,7 @@ function ProfilePageModal(props) {
             <br />
 
             <Button variant="primary" onClick={handleShow}>
-                Profile
+            🐼 {user.username}'s Profile
             </Button>
 
             <Modal

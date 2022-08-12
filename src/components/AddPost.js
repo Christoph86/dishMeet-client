@@ -19,7 +19,7 @@ function AddPost(props) {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const requestBody = { title, description, user: user._id, recipeId: props.recipeId };
+        const requestBody = { title, description, user:user.username, recipeId: props.recipeId };
         axios
             .post(
                 `${process.env.REACT_APP_API_URL}/posts`,
