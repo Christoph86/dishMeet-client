@@ -65,6 +65,7 @@ function AddPost(props) {
                 </Form.Group>
                 <Button variant="warning" type="submit">Submit new Comment</Button>
             </Form>
+            <br/>
         </div >
     );
 }

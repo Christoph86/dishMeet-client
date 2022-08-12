@@ -131,7 +131,7 @@ function ShowRecipeDetailsModal(props) {
 
                                 <p>about this Recipe:</p>
                                 <pre>{recipe.description}</pre>
-                                <img src={recipe.image} alt={recipe.title} />
+                                {recipe.image && <img className="imgOnDetails" src={recipe.image} alt={recipe.title} />}
                                 <p>servings: {recipe.servings}</p>
                                 <p>Ingedients:</p>
                                 <pre>{recipe.ingredients}</pre>
@@ -141,24 +141,27 @@ function ShowRecipeDetailsModal(props) {
                         )}
 
                         {recipe && user && recipe.user._id === user._id && ( //you are the Author, show edit, delete
-                            <>  <br />
+                            <>  
                                 <div>
                                     <EditRecipeModal recipeId={recipeId} refreshDetails={getRecipe} />
                                     <Button onClick={deleteRecipe} variant="danger" >Delete the Recipe</Button>
                                 </div>
-
+                                <br/>
                             </>)}
 
                         <div className="card">
                             <hr />Comments:<hr />
                             {recipe &&
                                 recipe.posts.map((post) => (
+                                    <>
                                     <li className="PostCard card" key={post._id}>
                                         {/* {console.log("postObj", post)} */}
                                         by: {post.user}, created on: {post.createdAt}
                                         <h5>{post.title}</h5>
                                         <p>{post.description}</p>
                                     </li>
+                                    <br/>
+                                    </>
                                 ))}
                         </div>
 
@@ -170,7 +173,9 @@ function ShowRecipeDetailsModal(props) {
                             </>
                         )}
                         {user && (
+                        <><br/>
                             <div className='card'>
+                                <br/>
                                 <Button
                                     variant="warning"
                                     onClick={() => setOpen(!open)}
@@ -179,12 +184,14 @@ function ShowRecipeDetailsModal(props) {
                                 >
                                     Add new Comment ↕️
                                 </Button>
+                                <br/>
                                 <Collapse in={open}>
                                     <div id="collapse-addRecipe-Form">
                                         <AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe} />
                                     </div>
                                 </Collapse>
                             </div>
+                            </>
                         )}
 
                         <br />
@@ -192,10 +199,9 @@ function ShowRecipeDetailsModal(props) {
                             <Link to="/recipes">
                                 <Button variant="secondary" onClick={handleClose}>back to all Recipes</Button>
                             </Link>
-                            <Button variant="secondary" onClick={handleClose}>
-                                Close this Recipe
-                            </Button>
+                           
                         </div>
+                        <br/>
                     </div>
                 </Modal.Body>
             </Modal>
