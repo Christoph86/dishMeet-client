@@ -34,40 +34,40 @@ function ShowRecipeDetailsModal(props) {
         // eslint-disable-next-line
     }, [recipeId]);
 
-    const checkIfLiked = (recipe) =>{
+    const checkIfLiked = (recipe) => {
         return (user && recipe && recipe.likes.includes(user._id))
     }
 
-    const toggleLiked = (likedBoolean, recipeId, recipeLikes) =>{
-        if(!likedBoolean){ //add you to likes[] of targeted Recipe
+    const toggleLiked = (likedBoolean, recipeId, recipeLikes) => {
+        if (!likedBoolean) { //add you to likes[] of targeted Recipe
             recipeLikes.push(user._id)
             const requestBody = {
-                likes : recipeLikes
+                likes: recipeLikes
             };
             axios
-            .put(
-                `${process.env.REACT_APP_API_URL}/recipes/${recipeId}/likes`,
-                requestBody,
-                { headers: { Authorization: `Bearer ${storedToken}` } }
-            )
-            .then((response) => {
-                getRecipe()
-            });
+                .put(
+                    `${process.env.REACT_APP_API_URL}/recipes/${recipeId}/likes`,
+                    requestBody,
+                    { headers: { Authorization: `Bearer ${storedToken}` } }
+                )
+                .then((response) => {
+                    getRecipe()
+                });
             console.log("add my heart");
         } else { //remove you from likes[] of targeted Recipe
-            recipeLikes = recipeLikes.filter((e)=>{return e != user._id})
+            recipeLikes = recipeLikes.filter((e) => { return e != user._id })
             const requestBody = {
-                likes : recipeLikes
+                likes: recipeLikes
             };
             axios
-            .put(
-                `${process.env.REACT_APP_API_URL}/recipes/${recipeId}/likes`,
-                requestBody,
-                { headers: { Authorization: `Bearer ${storedToken}` } }
-            )
-            .then((response) => {
-                getRecipe()
-            });
+                .put(
+                    `${process.env.REACT_APP_API_URL}/recipes/${recipeId}/likes`,
+                    requestBody,
+                    { headers: { Authorization: `Bearer ${storedToken}` } }
+                )
+                .then((response) => {
+                    getRecipe()
+                });
             console.log("remove my Heart");
         }
     }
@@ -103,7 +103,7 @@ function ShowRecipeDetailsModal(props) {
             <br />
 
             <Button variant="primary" onClick={handleShow}>
-               <strong>Show Details</strong>
+                <strong>Show Details</strong>
                 {/* {recipe && recipe.title} */}
             </Button>
 
@@ -120,33 +120,33 @@ function ShowRecipeDetailsModal(props) {
                 <Modal.Body>
                     <div className="RecipeDetails card">
 
-                        <p>by: {recipe && recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate} Heart
-                        {checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(true, recipe._id, recipe.likes)}}>💗</span>} 
-                           {!checkIfLiked(recipe)&& <span onClick={() => {toggleLiked(false, recipe._id, recipe.likes)}}>🤍</span>} 
-                        
+                        <p><strong>by: {recipe && recipe.user.username},created at: {dateOfCreation}, last activity: {dateOfLastUpdate} </strong>
+                            {checkIfLiked(recipe) && <span onClick={() => { toggleLiked(true, recipe._id, recipe.likes) }}>💗</span>}
+                            {!checkIfLiked(recipe) && <span onClick={() => { toggleLiked(false, recipe._id, recipe.likes) }}>🤍</span>}
+
                         </p>
 
                         {recipe && (
                             <div className="card">
 
-                                <p>about this Recipe:</p>
+                                <p><strong>about this Recipe:</strong></p>
                                 <pre>{recipe.description}</pre>
                                 {recipe.image && <img className="imgOnDetails" src={recipe.image} alt={recipe.title} />}
-                                <p>servings: {recipe.servings}</p>
-                                <p>Ingedients:</p>
+                                <p><strong>servings: </strong>{recipe.servings}</p>
+                                <p><strong>Ingedients:</strong></p>
                                 <pre>{recipe.ingredients}</pre>
-                                <p>Cooking Advices:</p>
+                                <p><strong>Cooking Advices:</strong></p>
                                 <pre>{recipe.cookingAdvice}</pre>
                             </div>
                         )}
 
                         {recipe && user && recipe.user._id === user._id && ( //you are the Author, show edit, delete
-                            <>  
+                            <>
                                 <div>
                                     <EditRecipeModal recipeId={recipeId} refreshDetails={getRecipe} />
                                     <Button onClick={deleteRecipe} variant="danger" >Delete the Recipe</Button>
                                 </div>
-                                <br/>
+                                <br />
                             </>)}
 
                         <div className="card">
@@ -154,13 +154,12 @@ function ShowRecipeDetailsModal(props) {
                             {recipe &&
                                 recipe.posts.map((post) => (
                                     <>
-                                    <li className="PostCard card" key={post._id}>
-                                        {/* {console.log("postObj", post)} */}
-                                        by: {post.user}, created on: {post.createdAt}
-                                        <h5>{post.title}</h5>
-                                        <p>{post.description}</p>
-                                    </li>
-                                    <br/>
+                                        <li className="PostCard card" key={post._id}>
+                                            by: {post.user}, created on: {post.createdAt}
+                                            <h5>{post.title}</h5>
+                                            <p>{post.description}</p>
+                                        </li>
+                                        <br />
                                     </>
                                 ))}
                         </div>
@@ -173,24 +172,24 @@ function ShowRecipeDetailsModal(props) {
                             </>
                         )}
                         {user && (
-                        <><br/>
-                            <div className='card'>
-                                <br/>
-                                <Button
-                                    variant="warning"
-                                    onClick={() => setOpen(!open)}
-                                    aria-controls="collapse-addRecipe-Form"
-                                    aria-expanded={open}
-                                >
-                                    Add new Comment ↕️
-                                </Button>
-                                <br/>
-                                <Collapse in={open}>
-                                    <div id="collapse-addRecipe-Form">
-                                        <AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe} />
-                                    </div>
-                                </Collapse>
-                            </div>
+                            <><br />
+                                <div className='card'>
+                                    <br />
+                                    <Button
+                                        variant="warning"
+                                        onClick={() => setOpen(!open)}
+                                        aria-controls="collapse-addRecipe-Form"
+                                        aria-expanded={open}
+                                    >
+                                        Add new Comment ↕️
+                                    </Button>
+                                    <br />
+                                    <Collapse in={open}>
+                                        <div id="collapse-addRecipe-Form">
+                                            <AddPost recipeId={recipeId} refreshRecipeDetails={getRecipe} />
+                                        </div>
+                                    </Collapse>
+                                </div>
                             </>
                         )}
 
@@ -199,9 +198,9 @@ function ShowRecipeDetailsModal(props) {
                             <Link to="/recipes">
                                 <Button variant="secondary" onClick={handleClose}>back to all Recipes</Button>
                             </Link>
-                           
+
                         </div>
-                        <br/>
+                        <br />
                     </div>
                 </Modal.Body>
             </Modal>
